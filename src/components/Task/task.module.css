@@ -1,0 +1,13 @@
+.checkbox{
+    margin: 10px 5px 0px 255px;
+}
+
+.task{
+    margin: 0 auto 20px;
+    width: 18rem;
+}
+
+.checked{
+    background-color: #DC3545;
+    color: white;
+}
