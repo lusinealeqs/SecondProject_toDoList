@@ -101,6 +101,7 @@ class ToDo extends Component {
                     onRemove={this.removeTask}
                     onCheck={this.handleCheck(task.id)}
                     onEdit={this.handleEdit(task)}
+                    disabled={!!checkedTasks.size}
                 />
             </Col>
         );
@@ -109,14 +110,14 @@ class ToDo extends Component {
             <Container fluid={true}>
                 <Row >
                     <Col md={{ span: 6, offset: 3 }}>
-                        <NewTask onAdd={this.addTask} />
+                        <NewTask onAdd={this.addTask} disabled={!!checkedTasks.size} />
                     </Col>
                 </Row>
                 <Row>{tasksComponents}</Row>
                 <Row className='justify-content-center'>
                     <Button
                         variant="outline-danger"
-                        disabled={checkedTasks.size ? false : true}
+                        disabled={!checkedTasks.size}
                         onClick={this.toggleConfirm}
                     >
                         Remove selected</Button>

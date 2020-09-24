@@ -31,6 +31,7 @@ class NewTask extends PureComponent {
     }
 
     render() {
+        const { disabled } = this.props;
         return (
             <InputGroup
                 className="my-3"
@@ -42,9 +43,15 @@ class NewTask extends PureComponent {
                     placeholder="Input task"
                     aria-label="Input task"
                     aria-describedby="basic-addon2"
+                    disabled={disabled}
                 />
                 <InputGroup.Append>
-                    <Button onClick={this.sendValue} variant="outline-light">Add task</Button>
+                    <Button onClick={this.sendValue}
+                        variant="info"
+                        disabled={disabled}
+                    >
+                        Add task
+                        </Button>
                 </InputGroup.Append>
             </InputGroup>
         );
