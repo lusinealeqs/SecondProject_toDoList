@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import idGenerator from '../helper/IdGenerator';
 import NewTask from './NewTask';
 import Task from './Task/Task';
 import Confirm from './Confirm';
@@ -12,23 +11,59 @@ class ToDo extends Component {
         tasks: [],
         checkedTasks: new Set(),
         showConfirm: false,
-        editTask: null
+        editTask: null,
+        openNewTaskModal: false
     };
 
-    addTask = (inputValue) => {
-        const tasks = [...this.state.tasks];
+    componentDidMount() {
+        fetch('http://localhost:3001/task', {
+            method: 'GET',
+            headers: {
+                "Content-Type": 'application/json',
+            }
+        })
+            .then((response) => response.json())
+            .then((tasks) => {
+                if (tasks.error) {
+                    throw tasks.error;
+                }
 
-        const newTask = {
-            id: idGenerator(),
-            text: inputValue
+                this.setState({
+                    tasks
+                });
+            })
+            .catch((err) => {
+                console.log('err', err);
+            });
+    }
+
+
+    addTask = (inputValue) => {
+        const data = {
+            title: inputValue
         };
 
-        tasks.push(newTask);
+        fetch('http://localhost:3001/task', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": 'application/json',
+            }
+        })
+            .then((response) => response.json())
+            .then((task) => {
+                if (task.error) {
+                    throw task.error;
+                }
 
-        this.setState({
-            tasks
-        });
-
+                this.setState({
+                    tasks: [task, ...this.state.tasks],
+                    openNewTaskModal: false
+                });
+            })
+            .catch((err) => {
+                console.log('err', err);
+            });
     };
 
     handleEdit = (task) => () => {
@@ -36,7 +71,7 @@ class ToDo extends Component {
     };
 
     removeTask = (taskId) => () => {
-        const newTasks = this.state.tasks.filter(task => task.id !== taskId);
+        const newTasks = this.state.tasks.filter(task => task._id !== taskId);
         this.setState({
             tasks: newTasks
         });
@@ -58,7 +93,7 @@ class ToDo extends Component {
         let tasks = [...this.state.tasks];
 
         checkedTasks.forEach(taskId => {
-            tasks = tasks.filter(task => task.id !== taskId);
+            tasks = tasks.filter(task => task._id !== taskId);
         });
 
         checkedTasks.clear();
@@ -71,10 +106,9 @@ class ToDo extends Component {
     };
 
     handleSave = (taskId, value) => {
-
         const tasks = [...this.state.tasks];
 
-        const taskIndex = tasks.findIndex(task => task.id === taskId);
+        const taskIndex = tasks.findIndex(task => task._id === taskId);
 
         tasks[taskIndex] = {
             ...tasks[taskIndex],
@@ -93,34 +127,46 @@ class ToDo extends Component {
         });
     };
 
+    toggleNewTaskModal = () => {
+        this.setState({
+            openNewTaskModal: !this.state.openNewTaskModal
+        });
+    };
+
     render() {
         const { checkedTasks, tasks, showConfirm, editTask } = this.state;
         const tasksComponents = tasks.map((task) =>
-            <Col key={task.id}>
+            <Col key={task._id}>
                 <Task data={task}
                     onRemove={this.removeTask}
-                    onCheck={this.handleCheck(task.id)}
+                    onCheck={this.handleCheck(task._id)}
                     onEdit={this.handleEdit(task)}
-                    disabled={!!checkedTasks.size}
-                />
+                    disabled={!!checkedTasks.size} />
             </Col>
         );
 
         return (
             <Container fluid={true}>
-                <Row >
-                    <Col md={{ span: 6, offset: 3 }}>
-                        <NewTask onAdd={this.addTask} disabled={!!checkedTasks.size} />
-                    </Col>
+                <Row className='justify-content-center'>
+                    <Button
+                        variant="outline-primary"
+                        className='m-3'
+                        disabled={checkedTasks.size}
+                        onClick={this.toggleNewTaskModal}
+                    >
+                        Add My New Task!
+                    </Button>
                 </Row>
                 <Row>{tasksComponents}</Row>
                 <Row className='justify-content-center'>
                     <Button
+                        className='m-3'
                         variant="outline-danger"
                         disabled={!checkedTasks.size}
                         onClick={this.toggleConfirm}
                     >
-                        Remove selected</Button>
+                        Remove selected
+                    </Button>
                 </Row>
                 { showConfirm &&
                     <Confirm
@@ -134,6 +180,12 @@ class ToDo extends Component {
                         value={editTask}
                         onSave={this.handleSave}
                         onCancel={this.handleEdit(null)}
+                    />
+                }
+                { this.state.openNewTaskModal &&
+                    <NewTask
+                        onAdd={this.addTask}
+                        onCancel={this.toggleNewTaskModal}
                     />
                 }
             </Container>

@@ -13,7 +13,6 @@ class Task extends PureComponent {
         this.setState({
             checked: !this.state.checked
         });
-
         this.props.onCheck();
     };
 
@@ -40,8 +39,8 @@ class Task extends PureComponent {
                     onClick={this.toggleCheckbox}
                 />
                 <Card.Body>
-                    <Card.Title>Your Task</Card.Title>
-                    <Card.Text>{data.text}</Card.Text>
+                    <Card.Title>{data.title}</Card.Title>
+                    <Card.Text>{data.description}</Card.Text>
                     <Button
                         className='m-1'
                         variant="outline-dark"
@@ -53,7 +52,7 @@ class Task extends PureComponent {
                     <Button
                         className='m-1'
                         variant="outline-dark"
-                        onClick={onRemove(data.id)}
+                        onClick={onRemove(data._id)}
                         disabled={disabled}
                     >
                         <FontAwesomeIcon icon={faTrash} />

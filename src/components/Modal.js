@@ -42,9 +42,7 @@ class TaskModal extends Component {
         onHide={onCancel}
       >
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Edit Your Task
-          </Modal.Title>
+          <Modal.Title id="contained-modal-title-vcenter">Edit Your Task</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <FormControl
