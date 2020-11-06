@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import NewTask from './NewTask';
+import NewTask from './NewTask/NewTask';
 import Task from './Task/Task';
 import Confirm from './Confirm';
-import Modal from './Modal'
+import EditTaskModal from './EditTaskModal'
 
 
 class ToDo extends Component {
@@ -38,11 +38,7 @@ class ToDo extends Component {
     }
 
 
-    addTask = (inputValue) => {
-        const data = {
-            title: inputValue
-        };
-
+    addTask = (data) => {
         fetch('http://localhost:3001/task', {
             method: 'POST',
             body: JSON.stringify(data),
@@ -71,10 +67,27 @@ class ToDo extends Component {
     };
 
     removeTask = (taskId) => () => {
-        const newTasks = this.state.tasks.filter(task => task._id !== taskId);
-        this.setState({
-            tasks: newTasks
-        });
+        fetch(`http://localhost:3001/task/${taskId}`, {
+            method: 'DELETE',
+            headers: {
+                "Content-Type": 'application/json',
+            }
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.error) {
+                    throw data.error;
+                }
+
+                const newTasks = this.state.tasks.filter(task => task._id !== taskId);
+                this.setState({
+                    tasks: newTasks
+                });
+
+            })
+            .catch((err) => {
+                console.log('err', err);
+            });
     };
 
     handleCheck = (taskId) => () => {
@@ -90,35 +103,63 @@ class ToDo extends Component {
 
     onRemoveSelected = () => {
         const checkedTasks = new Set(this.state.checkedTasks);
-        let tasks = [...this.state.tasks];
+        fetch(`http://localhost:3001/task/`, {
+            method: 'DELETE',
+            body: JSON.stringify({
+                tasks: [...checkedTasks]
+            }),
+            headers: {
+                "Content-Type": 'application/json',
+            }
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.error) {
+                    throw data.error;
+                }
+                let tasks = [...this.state.tasks];
 
-        checkedTasks.forEach(taskId => {
-            tasks = tasks.filter(task => task._id !== taskId);
-        });
+                checkedTasks.forEach(taskId => {
+                    tasks = tasks.filter(task => task._id !== taskId);
+                });
 
-        checkedTasks.clear();
+                checkedTasks.clear();
 
-        this.setState({
-            tasks,
-            checkedTasks,
-            showConfirm: false
-        });
+                this.setState({
+                    tasks,
+                    checkedTasks,
+                    showConfirm: false
+                });
+
+            })
+            .catch((err) => {
+                console.log('err', err);
+            });
     };
 
-    handleSave = (taskId, value) => {
-        const tasks = [...this.state.tasks];
+    handleSave = (taskId, data) => {
+        fetch(`http://localhost:3001/task/${taskId}`, {
+            method: 'PUT',
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": 'application/json',
+            }
+        })
+            .then((response) => response.json())
+            .then((editedTask) => {
 
-        const taskIndex = tasks.findIndex(task => task._id === taskId);
+                if (editedTask.error) {
+                    throw editedTask.error;
+                }
+                const tasks = [...this.state.tasks];
+                const foundIndex = tasks.findIndex(task => task._id === editedTask._id);
+                tasks[foundIndex] = editedTask;
 
-        tasks[taskIndex] = {
-            ...tasks[taskIndex],
-            text: value
-        };
-
-        this.setState({
-            tasks: tasks,
-            editTask: null
-        });
+                this.setState({ tasks, editTask: null });
+            })
+            .catch((err) => {
+                console.log('err', err);
+            });
     };
 
     toggleConfirm = () => {
@@ -156,9 +197,6 @@ class ToDo extends Component {
                     >
                         Add My New Task!
                     </Button>
-                </Row>
-                <Row>{tasksComponents}</Row>
-                <Row className='justify-content-center'>
                     <Button
                         className='m-3'
                         variant="outline-danger"
@@ -168,6 +206,8 @@ class ToDo extends Component {
                         Remove selected
                     </Button>
                 </Row>
+                <Row>{tasksComponents}</Row>
+
                 { showConfirm &&
                     <Confirm
                         count={checkedTasks.size}
@@ -176,8 +216,9 @@ class ToDo extends Component {
                     />
                 }
                 {!!editTask &&
-                    <Modal
+                    <EditTaskModal
                         value={editTask}
+                        data={editTask}
                         onSave={this.handleSave}
                         onCancel={this.handleEdit(null)}
                     />

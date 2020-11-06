@@ -19,8 +19,8 @@ function Confirm(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Footer>
-        <Button onClick={onSubmit} variant='outline-warning'>Remove</Button>
-        <Button onClick={onCancel} variant='outline-secondary'>Cancel</Button>
+        <Button onClick={onSubmit} variant='outline-warning'>Yes, Remove!</Button>
+        <Button onClick={onCancel} variant='outline-secondary'>No, Cancel!</Button>
       </Modal.Footer>
     </Modal>
   );
