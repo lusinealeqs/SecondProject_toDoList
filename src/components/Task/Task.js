@@ -3,6 +3,8 @@ import { Card, Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import styles from './task.module.css';
+import { Link } from 'react-router-dom';
+
 
 class Task extends PureComponent {
     state = {
@@ -39,7 +41,20 @@ class Task extends PureComponent {
                     onClick={this.toggleCheckbox}
                 />
                 <Card.Body>
-                    <Card.Title><i>{data.title}</i></Card.Title>
+                    <OverlayTrigger
+                        placement="left"
+                        overlay={
+                            <Tooltip>
+                                <strong>Go to Your Task page!</strong>
+                            </Tooltip>
+                        }>
+                        <Link
+                            to={`/task/${data._id}`}
+                            className={styles.taskLinks}
+                        >
+                            <Card.Title>{data.title}</Card.Title>
+                        </Link>
+                    </OverlayTrigger>
                     <Card.Text><b>Description:</b> {data.description}</Card.Text>
                     <Card.Text><b>Date:</b> {data.date ? data.date.slice(0, 10) : 'NONE'}</Card.Text>
                     <OverlayTrigger

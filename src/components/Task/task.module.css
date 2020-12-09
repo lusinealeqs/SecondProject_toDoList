@@ -12,3 +12,11 @@
     background-color: #DC3545;
     color: white;
 }
+.taskLinks{
+    text-decoration: none;
+    color: pink;
+}
+.taskLinks:hover{
+    text-decoration: none;
+    font-style: italic;
+}

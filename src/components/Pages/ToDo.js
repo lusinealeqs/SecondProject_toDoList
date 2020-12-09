@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import NewTask from './NewTask/NewTask';
-import Task from './Task/Task';
-import Confirm from './Confirm';
-import EditTaskModal from './EditTaskModal'
+import NewTask from '../NewTask/NewTask';
+import Task from '../Task/Task';
+import Confirm from '../Confirm';
+import EditTaskModal from '../EditTaskModal'
 
 
 class ToDo extends Component {
@@ -187,7 +187,8 @@ class ToDo extends Component {
         );
 
         return (
-            <Container fluid={true}>
+            <Container fluid={true} className="homepageBody">
+                <h1 className="title">Welcome to Your ToDo Space</h1>
                 <Row className='justify-content-center'>
                     <Button
                         variant="outline-primary"
@@ -217,7 +218,7 @@ class ToDo extends Component {
                 }
                 {!!editTask &&
                     <EditTaskModal
-                        value={editTask}
+                        // value={editTask}
                         data={editTask}
                         onSave={this.handleSave}
                         onCancel={this.handleEdit(null)}
