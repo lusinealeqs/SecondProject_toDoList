@@ -4,6 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import styles from './task.module.css';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { removeTask } from '../../store/actions';
+import { formatDate, shortStr } from '../../helpers/helpfulFunctions'
+import PropTypes from 'prop-types';
 
 
 class Task extends PureComponent {
@@ -25,7 +29,7 @@ class Task extends PureComponent {
     }
 
     render() {
-        const { data, onRemove, onEdit, disabled } = this.props;
+        const { data, removeTask, onEdit, disabled } = this.props;
         const { checked } = this.state;
 
         const cardClasses = ['card', styles.task];
@@ -55,8 +59,9 @@ class Task extends PureComponent {
                             <Card.Title>{data.title}</Card.Title>
                         </Link>
                     </OverlayTrigger>
-                    <Card.Text><b>Description:</b> {data.description}</Card.Text>
-                    <Card.Text><b>Date:</b> {data.date ? data.date.slice(0, 10) : 'NONE'}</Card.Text>
+                    <Card.Text><b>Description:</b> {shortStr(data.description, 25)}</Card.Text>
+                    <Card.Text><b>Date:</b> {formatDate(data.date)}</Card.Text>
+                    <Card.Text><b>Created:</b> {formatDate(data.created_at)}</Card.Text>
                     <OverlayTrigger
                         placement="bottom"
                         overlay={
@@ -83,7 +88,7 @@ class Task extends PureComponent {
                         <Button
                             className='m-1'
                             variant="outline-dark"
-                            onClick={onRemove(data._id)}
+                            onClick={() => removeTask(data._id)}
                             disabled={disabled}>
                             <FontAwesomeIcon icon={faTrash} />
                         </Button>
@@ -94,4 +99,15 @@ class Task extends PureComponent {
     }
 }
 
-export default Task;
+Task.propTypes = {
+    data: PropTypes.object.isRequired,
+    onCheck: PropTypes.func.isRequired,
+    onEdit: PropTypes.func.isRequired,
+    disabled: PropTypes.bool,
+};
+
+const mapDispatchToProps = {
+    removeTask
+};
+
+export default connect(null, mapDispatchToProps)(Task);

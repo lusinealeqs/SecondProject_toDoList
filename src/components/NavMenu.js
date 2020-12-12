@@ -18,9 +18,15 @@ export default function NavMenu() {
                 <NavLink
                     exact
                     activeClassName='activeLink'
-                    to='/task'>
-                    Task
+                    to='/about'>
+                    About
                 </NavLink>
+                <NavLink
+                    to='/contact'
+                    activeClassName='activeLink'
+                    exact>
+                    Contact
+              </NavLink>
             </Nav>
         </Navbar>
     );
