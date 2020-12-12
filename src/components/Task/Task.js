@@ -1,8 +1,14 @@
 import React, { PureComponent } from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import styles from './task.module.css';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { removeTask } from '../../store/actions';
+import { formatDate, shortStr } from '../../helpers/helpfulFunctions'
+import PropTypes from 'prop-types';
+
 
 class Task extends PureComponent {
     state = {
@@ -13,7 +19,6 @@ class Task extends PureComponent {
         this.setState({
             checked: !this.state.checked
         });
-
         this.props.onCheck();
     };
 
@@ -24,7 +29,7 @@ class Task extends PureComponent {
     }
 
     render() {
-        const { data, onRemove, onEdit } = this.props;
+        const { data, removeTask, onEdit, disabled } = this.props;
         const { checked } = this.state;
 
         const cardClasses = ['card', styles.task];
@@ -40,26 +45,69 @@ class Task extends PureComponent {
                     onClick={this.toggleCheckbox}
                 />
                 <Card.Body>
-                    <Card.Title>Your Task</Card.Title>
-                    <Card.Text>{data.text}</Card.Text>
-                    <Button
-                        className='m-1'
-                        variant="outline-dark"
-                        onClick={onEdit}
-                    >
-                        <FontAwesomeIcon icon={faEdit} />
-                    </Button>
-                    <Button
-                        className='m-1'
-                        variant="outline-dark"
-                        onClick={onRemove(data.id)}
-                    >
-                        <FontAwesomeIcon icon={faTrash} />
-                    </Button>
+                    <OverlayTrigger
+                        placement="left"
+                        overlay={
+                            <Tooltip>
+                                <strong>Go to Your Task page!</strong>
+                            </Tooltip>
+                        }>
+                        <Link
+                            to={`/task/${data._id}`}
+                            className={styles.taskLinks}
+                        >
+                            <Card.Title>{data.title}</Card.Title>
+                        </Link>
+                    </OverlayTrigger>
+                    <Card.Text><b>Description:</b> {shortStr(data.description, 25)}</Card.Text>
+                    <Card.Text><b>Date:</b> {formatDate(data.date)}</Card.Text>
+                    <Card.Text><b>Created:</b> {formatDate(data.created_at)}</Card.Text>
+                    <OverlayTrigger
+                        placement="bottom"
+                        overlay={
+                            <Tooltip>
+                                <strong>Edit Your Task!</strong>
+                            </Tooltip>
+                        }>
+                        <Button
+                            className='m-1'
+                            variant="outline-dark"
+                            onClick={onEdit}
+                            disabled={disabled}
+                        >
+                            <FontAwesomeIcon icon={faEdit} />
+                        </Button>
+                    </OverlayTrigger>
+                    <OverlayTrigger
+                        placement="bottom"
+                        overlay={
+                            <Tooltip>
+                                <strong>Remove Your Task!</strong>
+                            </Tooltip>
+                        }>
+                        <Button
+                            className='m-1'
+                            variant="outline-dark"
+                            onClick={() => removeTask(data._id)}
+                            disabled={disabled}>
+                            <FontAwesomeIcon icon={faTrash} />
+                        </Button>
+                    </OverlayTrigger>
                 </Card.Body>
             </Card>
         );
     }
 }
 
-export default Task;
+Task.propTypes = {
+    data: PropTypes.object.isRequired,
+    onCheck: PropTypes.func.isRequired,
+    onEdit: PropTypes.func.isRequired,
+    disabled: PropTypes.bool,
+};
+
+const mapDispatchToProps = {
+    removeTask
+};
+
+export default connect(null, mapDispatchToProps)(Task);

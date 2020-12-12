@@ -5,9 +5,18 @@
 .task{
     margin: 0 auto 20px;
     width: 18rem;
+    background-color: palevioletred;
 }
 
 .checked{
     background-color: #DC3545;
     color: white;
+}
+.taskLinks{
+    text-decoration: none;
+    color: pink;
+}
+.taskLinks:hover{
+    text-decoration: none;
+    font-style: italic;
 }
