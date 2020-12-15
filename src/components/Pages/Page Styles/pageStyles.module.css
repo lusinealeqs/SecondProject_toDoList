@@ -1,0 +1,70 @@
+.singlePage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 6%;
+}
+.singlePageInnerDiv{
+    width: 50%;
+    font-size: 18px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 20px;
+    text-align: center;
+}
+.contenierOfAboutPage{
+    display: flex;
+    margin-top: 4%;
+}
+.innerDivOfAboutPage{
+    margin-bottom: 37%;
+    width: 50%;
+    font-size: 18px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 20px;
+    text-align: center;
+}
+.innerDivOfAboutPage p{
+    margin-top: 3%;
+}
+.img{
+    width: 100%;
+}
+.leftDivOfAboutPage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0% 1% 8% 1%;
+    width: 25%;
+    font-size: 18px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 20px;
+    text-align: center;
+}
+.rightDivOfAboutPage{
+    margin: 0% 1%;
+    margin-bottom: 37%;
+    width: 35%;
+    height: auto;
+    font-size: 18px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 20px;
+    text-align: center;
+}
+.contactPage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 6%;
+}
+.contactPageInnerDiv{
+    width: 50%;
+    font-size: 18px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 20px;
+    text-align: center;
+}

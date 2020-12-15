@@ -106,6 +106,7 @@ export const mainReducer = (state = defaultState, action) => {
 
         case actionTypes.REMOVE_TASKS_SUCCESS: {
             let newTasks = [...state.tasks];
+            
             action.taskIds.forEach(taskId => {
                 newTasks = newTasks.filter(task => task._id !== taskId);
             });

@@ -49,7 +49,7 @@ class Task extends PureComponent {
                         placement="left"
                         overlay={
                             <Tooltip>
-                                <strong>Go to Your Task page!</strong>
+                                <strong>Go to Your Task page to see more!</strong>
                             </Tooltip>
                         }>
                         <Link
@@ -59,14 +59,14 @@ class Task extends PureComponent {
                             <Card.Title>{data.title}</Card.Title>
                         </Link>
                     </OverlayTrigger>
-                    <Card.Text><b>Description:</b> {shortStr(data.description, 25)}</Card.Text>
-                    <Card.Text><b>Date:</b> {formatDate(data.date)}</Card.Text>
+                    <Card.Text><b>Description:</b> {shortStr(data.description, 40)}</Card.Text>
+                    <Card.Text><b>Deadline:</b> {formatDate(data.date)}</Card.Text>
                     <Card.Text><b>Created:</b> {formatDate(data.created_at)}</Card.Text>
                     <OverlayTrigger
                         placement="bottom"
                         overlay={
                             <Tooltip>
-                                <strong>Edit Your Task!</strong>
+                                <strong>Edit</strong>
                             </Tooltip>
                         }>
                         <Button
@@ -82,7 +82,7 @@ class Task extends PureComponent {
                         placement="bottom"
                         overlay={
                             <Tooltip>
-                                <strong>Remove Your Task!</strong>
+                                <strong>Remove</strong>
                             </Tooltip>
                         }>
                         <Button

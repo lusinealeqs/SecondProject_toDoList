@@ -4,7 +4,6 @@ import * as actionTypes from './actionTypes';
 const apiUrl = process.env.REACT_APP_API_URL;
 
 export function getTask(taskId){
-
     return (dispatch)=>{
         dispatch({type: actionTypes.LOADING});
 
@@ -61,13 +60,11 @@ export function removeTask(taskId, from='tasks'){
 }
 
 export function removeTasks(data) {
-
     return (dispatch) => {
         dispatch({ type: actionTypes.REMOVING_TASKS });
 
-        request(`${apiUrl}/task/`, 'PATCH', data)
+        request(`${apiUrl}/task/`, 'DELETE', data)
             .then(() => {
-
                 dispatch({ type: actionTypes.REMOVE_TASKS_SUCCESS, taskIds: data.tasks });
             })
             .catch(err => {
