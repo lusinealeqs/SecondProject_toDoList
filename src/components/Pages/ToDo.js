@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { getTasks, removeTasks } from '../../store/actions';
 import NewTask from '../NewTask/NewTask';
 import Task from '../Task/Task';
 import Confirm from '../Confirm';
 import EditTaskModal from '../EditTaskModal';
-import { connect } from 'react-redux';
-import { getTasks, removeTasks } from '../../store/actions';
+import Search from '../Search/Search';
 
 
 class ToDo extends PureComponent {
@@ -106,6 +107,7 @@ class ToDo extends PureComponent {
                     >
                         Remove selected
                     </Button>
+                    <Search />
                 </Row>
                 <Row>{tasksComponents}</Row>
 

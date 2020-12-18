@@ -6,7 +6,7 @@ import styles from './task.module.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { removeTask } from '../../store/actions';
-import { formatDate, shortStr } from '../../helpers/helpfulFunctions'
+import { formatDate, shortStr } from '../../helpers/helpfulFunctions';
 import PropTypes from 'prop-types';
 
 
