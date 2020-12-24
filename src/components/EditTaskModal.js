@@ -94,7 +94,7 @@ class EditTaskModal extends PureComponent {
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
             Edit task
-                 </Modal.Title>
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form.Group controlId="exampleForm.ControlInput1">

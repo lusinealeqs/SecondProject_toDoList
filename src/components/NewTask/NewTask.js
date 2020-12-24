@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, createRef } from 'react';
 import { FormControl, Button, Modal, Form } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import DatePicker from 'react-datepicker';
@@ -9,13 +9,21 @@ import styles from './newTask.module.css';
 
 
 class NewTask extends PureComponent {
-    state = {
-        title: '',
-        description: '',
-        date: new Date(),
-        valid: true,
-        validationType: null
-    };
+    constructor(props) {
+        super(props)
+        this.state = {
+            title: '',
+            description: '',
+            date: new Date(),
+            valid: true,
+            validationType: null
+        };
+        this.titleRef = createRef();
+    }
+
+    componentDidMount() {
+        this.titleRef.current.focus();
+    }
 
     validationErrors = {
         requiredError: 'The field is required!',
@@ -63,6 +71,8 @@ class NewTask extends PureComponent {
             return;
         }
 
+        date = date || new Date();
+
         const data = {
             title,
             description,
@@ -90,7 +100,7 @@ class NewTask extends PureComponent {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        Add new task
+                        Add New Task
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -104,6 +114,7 @@ class NewTask extends PureComponent {
                             placeholder="Title"
                             aria-label="Title"
                             aria-describedby="basic-addon2"
+                            ref={this.titleRef}
                         />
                     </Form.Group>
                     <Form.Control

@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
+import styles from '../Pages/Page Styles/pageStyles.module.css';
 import EditTaskModal from '../EditTaskModal';
 import { getTask, removeTask } from '../../store/actions';
 import { connect } from 'react-redux';
@@ -46,55 +47,56 @@ class SingleTask extends PureComponent {
             <>
                 {
                     task ?
-                        <div >
-                            <p>Title: {task.title}</p>
-                            <p>Description: {task.description}</p>
-                            <p>Date: {formatDate(task.date)}</p>
-                            <p>Created: {formatDate(task.created_at)}</p>
-                            <OverlayTrigger
-                                placement="top"
-                                overlay={
-                                    <Tooltip>
-                                        <strong>Edit</strong>
-                                    </Tooltip>
-                                }
-                            >
-                                <Button
-                                    title='Edit'
-                                    className='m-1'
-                                    variant="info"
-                                    onClick={this.toggleEditModal}
-
+                        <div className={styles.singlePage}>
+                            <div className={styles.singlePageInnerDiv}>
+                                <p><b>Title:</b> {task.title}</p>
+                                <p><b>Description:</b> {task.description}</p>
+                                <p><b>Deadline:</b> {formatDate(task.date)}</p>
+                                <p><b>Created:</b> {formatDate(task.created_at)}</p>
+                                <OverlayTrigger
+                                    placement="top"
+                                    overlay={
+                                        <Tooltip>
+                                            <strong>Edit</strong>
+                                        </Tooltip>
+                                    }
                                 >
-                                    <FontAwesomeIcon icon={faEdit} />
-                                </Button>
-                            </OverlayTrigger>
+                                    <Button
+                                        title='Edit'
+                                        className='m-1'
+                                        variant="info"
+                                        onClick={this.toggleEditModal}
+                                    >
+                                        <FontAwesomeIcon icon={faEdit} />
+                                    </Button>
+                                </OverlayTrigger>
 
-                            <OverlayTrigger
-                                placement="top"
-                                overlay={
-                                    <Tooltip>
-                                        <strong>Remove</strong>
-                                    </Tooltip>
-                                }
-                            >
-                                <Button
-                                    title='Remove'
-                                    className='m-1'
-                                    variant="danger"
-                                    onClick={this.handleRemove}
+                                <OverlayTrigger
+                                    placement="top"
+                                    overlay={
+                                        <Tooltip>
+                                            <strong>Remove</strong>
+                                        </Tooltip>
+                                    }
                                 >
-                                    <FontAwesomeIcon icon={faTrash} />
-                                </Button>
-                            </OverlayTrigger>
+                                    <Button
+                                        title='Remove'
+                                        className='m-1'
+                                        variant="danger"
+                                        onClick={this.handleRemove}
+                                    >
+                                        <FontAwesomeIcon icon={faTrash} />
+                                    </Button>
+                                </OverlayTrigger>
 
-                            {isEdit &&
-                                <EditTaskModal
-                                    data={task}
-                                    onCancel={this.toggleEditModal}
-                                    from='single'
-                                />
-                            }
+                                {isEdit &&
+                                    <EditTaskModal
+                                        data={task}
+                                        onCancel={this.toggleEditModal}
+                                        from='single'
+                                    />
+                                }
+                            </div>
                         </div> : <div>Oops! There is no task.</div>}
             </>
         );

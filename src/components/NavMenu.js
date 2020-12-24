@@ -3,13 +3,13 @@ import { Navbar, Nav } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
 export default function NavMenu() {
-
     return (
-        <Navbar bg="light" variant="light">
+        <Navbar bg="white" variant="white" className="navbarMenu">
             <Navbar.Brand>
                 <NavLink
                     to='/'
                     activeClassName='activeLink'
+                    className='homePageNav'
                     exact>
                     Home
                 </NavLink>
@@ -18,15 +18,17 @@ export default function NavMenu() {
                 <NavLink
                     exact
                     activeClassName='activeLink'
+                    className="navLinks"
                     to='/about'>
                     About
                 </NavLink>
-                <NavLink
+                {/* <NavLink 
                     to='/contact'
                     activeClassName='activeLink'
+                    className="navLinks"
                     exact>
                     Contact
-              </NavLink>
+              </NavLink> */}
             </Nav>
         </Navbar>
     );

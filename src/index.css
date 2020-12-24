@@ -50,3 +50,27 @@ code {
 .activeLink:hover{
   text-decoration: none;
 }
+.homePageNav:hover{
+  text-decoration: none;
+  padding: 5px 10px;
+  background-color: pink;
+  border-radius: 8px;
+}
+.navLinks{
+  padding-right: 15px;
+}
+.navLinks:hover{
+  text-decoration: none;
+  padding: 5px 10px;
+  background-color: pink;
+  border-radius: 8px;
+}
+.navbarMenu{
+  border-radius: 100px;
+  border-bottom: solid 5px black;
+  margin-top: 1%;
+}
+.footerPart{
+  font-size: 16px;
+  padding-left: 5px;
+}

@@ -3,11 +3,13 @@
 }
 
 .task{
-    margin: 0 auto 20px;
+    margin: 20px auto 20px;
     width: 18rem;
     background-color: palevioletred;
 }
-
+.done{
+    opacity: 0.6;
+}
 .checked{
     background-color: #DC3545;
     color: white;
@@ -19,4 +21,7 @@
 .taskLinks:hover{
     text-decoration: none;
     font-style: italic;
+}
+.sigleTaskDiv{
+    width: 50%;
 }
