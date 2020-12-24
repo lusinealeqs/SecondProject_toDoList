@@ -7,7 +7,9 @@
     width: 18rem;
     background-color: palevioletred;
 }
-
+.done{
+    opacity: 0.6;
+}
 .checked{
     background-color: #DC3545;
     color: white;

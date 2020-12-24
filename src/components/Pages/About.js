@@ -13,14 +13,13 @@ export default function About() {
             <div className={styles.leftDivOfAboutPage}>
                 <div className={styles.leftInnerDivOfAboutPage}>
                     <h3>Meet the Team!</h3>
-                    {/* <p> */}
-                    <Card style={{ width: '18rem', margin: "0 0 2% 0", height: "auto"}}>
+                    <Card style={{ width: '18rem', margin: "0 0 5% 0", height: "auto"}}>
                         <Card.Img variant="top" src={Masis} />
                         <Card.Body>
                             <Card.Title>Masis Karapetyan</Card.Title>
                         </Card.Body>
                     </Card>
-                    <Card style={{ width: '18rem', margin: "0 0 2% 0" }}>
+                    <Card style={{ width: '18rem', margin: "0 0 5% 0" }}>
                         <Card.Img variant="top" src={Anahit} />
                         <Card.Body>
                             <Card.Title>Anahit Khechumyan</Card.Title>
@@ -32,7 +31,6 @@ export default function About() {
                             <Card.Title>Lusine Aleksanyan</Card.Title>
                         </Card.Body>
                     </Card>
-                    {/* </p> */}
                 </div>
             </div>
             <div className={styles.innerDivOfAboutPage}>

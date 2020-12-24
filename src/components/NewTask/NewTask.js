@@ -71,6 +71,8 @@ class NewTask extends PureComponent {
             return;
         }
 
+        date = date || new Date();
+
         const data = {
             title,
             description,
@@ -98,7 +100,7 @@ class NewTask extends PureComponent {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        Add new task
+                        Add New Task
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -112,7 +114,7 @@ class NewTask extends PureComponent {
                             placeholder="Title"
                             aria-label="Title"
                             aria-describedby="basic-addon2"
-                            ref = {this.titleRef}
+                            ref={this.titleRef}
                         />
                     </Form.Group>
                     <Form.Control

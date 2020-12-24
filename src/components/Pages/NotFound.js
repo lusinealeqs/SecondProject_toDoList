@@ -7,7 +7,7 @@ export default function NotFound() {
     return (
         <>
             <div className="not-found">OOPS...</div>
-            <div className="not-found">We couldn't find your Task page :(</div>
+            <h6 className="not-found">We couldn't find what you were searching! :(</h6>
             <div className="not-found">Try again later!</div>
             <OverlayTrigger
                 placement="bottom"

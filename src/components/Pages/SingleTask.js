@@ -66,7 +66,6 @@ class SingleTask extends PureComponent {
                                         className='m-1'
                                         variant="info"
                                         onClick={this.toggleEditModal}
-
                                     >
                                         <FontAwesomeIcon icon={faEdit} />
                                     </Button>

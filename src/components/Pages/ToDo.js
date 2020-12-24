@@ -105,7 +105,7 @@ class ToDo extends PureComponent {
                         disabled={!checkedTasks.size}
                         onClick={this.toggleConfirm}
                     >
-                        Remove selected
+                        Remove Selected Tasks
                     </Button>
                     <Search />
                 </Row>

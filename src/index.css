@@ -50,9 +50,6 @@ code {
 .activeLink:hover{
   text-decoration: none;
 }
-/* .homePageNav{
-
-} */
 .homePageNav:hover{
   text-decoration: none;
   padding: 5px 10px;
@@ -68,8 +65,12 @@ code {
   background-color: pink;
   border-radius: 8px;
 }
-.navbar{
+.navbarMenu{
   border-radius: 100px;
   border-bottom: solid 5px black;
   margin-top: 1%;
+}
+.footerPart{
+  font-size: 16px;
+  padding-left: 5px;
 }

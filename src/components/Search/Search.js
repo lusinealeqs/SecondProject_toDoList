@@ -5,7 +5,9 @@ import { getTasks } from '../../store/actions';
 import { shortStr } from '../../helpers/helpfulFunctions';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
-import styles from './search.module.css'
+import styles from './search.module.css';
+
+
 const statusOptions = [
     {
         label: 'Unset',
@@ -150,7 +152,6 @@ function Search(props) {
 
                 </DropdownButton>
 
-
                 <DropdownButton
                     as={InputGroup.Append}
                     variant="outline-dark"
@@ -167,29 +168,29 @@ function Search(props) {
                             </Dropdown.Item>
                         )
                     }
-
                 </DropdownButton>
             </InputGroup>
 
-            {/* Since it was incomplete I commented it, later on I'll fix it */}
-            {/* {
-                dateOptions.map(option =>
-                    <div
-                        key={option.value}
-                    >
-                        <p>{option.label}</p>
-                        <DatePicker
-                            selected={dates[option.value]}
-                            onChange={(value) => setDates({
-                                ...dates,
-                                [option.value]: value
-                            })}
-                        />
-                    </div>
-                )
-            } */}
-
-
+            <div
+                className={styles.dateOptions}
+            >
+                {
+                    dateOptions.map(option =>
+                        <div
+                            key={option.value}
+                        >
+                            <span>{option.label}</span>
+                            <DatePicker
+                                selected={dates[option.value]}
+                                onChange={(value) => setDates({
+                                    ...dates,
+                                    [option.value]: value
+                                })}
+                            />
+                        </div>
+                    )
+                }
+            </div>
         </div>
     )
 }

@@ -6,15 +6,15 @@ import './Style/body.css'
 import SingleTask from './components/Pages/SingleTask'
 import NotFound from './components/Pages/NotFound'
 import About from './components/Pages/About'
-import Contact from './components/Pages/Contact'
 import Spinner from './components/Spinner/Spinner';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import NavMenu from './components/NavMenu'
 import { ToastContainer, toast } from 'react-toastify';
 import { connect } from 'react-redux';
+// import Footer from './components/Footer'
 
 class App extends PureComponent {
-
+  
   componentDidUpdate() {
     const { errorMessage, successMessage } = this.props;
     if (errorMessage) {
@@ -35,7 +35,7 @@ class App extends PureComponent {
             <Route path='/' exact component={Todo} />
             <Route path='/task/:id' exact component={SingleTask} />
             <Route path='/about' exact component={About} />
-            <Route path='/contact' exact component={Contact} />
+            {/* <Route path='/contact' exact component={Contact} /> */}
             <Route path='/not-found' exact component={NotFound} />
             <Redirect to='/not-found' />
           </Switch>
@@ -51,6 +51,7 @@ class App extends PureComponent {
             pauseOnHover
           />
         </div>
+        {/* <Footer /> */}
         {showSpinner && <Spinner />}
       </>
     );

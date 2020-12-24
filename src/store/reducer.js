@@ -106,7 +106,7 @@ export const mainReducer = (state = defaultState, action) => {
 
         case actionTypes.REMOVE_TASKS_SUCCESS: {
             let newTasks = [...state.tasks];
-            
+
             action.taskIds.forEach(taskId => {
                 newTasks = newTasks.filter(task => task._id !== taskId);
             });
@@ -148,6 +148,44 @@ export const mainReducer = (state = defaultState, action) => {
                     tasks: tasks
                 };
             }
+        }
+        case actionTypes.CHANGING_TASK_STATUS: {
+            return loadingState;
+        }
+
+        case actionTypes.CHANGE_TASK_STATUS_SUCCESS: {
+            let message;
+
+            if (action.status === 'done') {
+                message = 'Congtatulations, you have completed the task 🎉!!!';
+            }
+            else {
+                message = 'The task is active now!!!'
+            }
+
+            const newState = {
+                ...state,
+                loading: false,
+                successMessage: message,
+            }
+
+            if (action.from === 'single') {
+                return {
+                    ...newState,
+                    task: action.editedTask
+                };
+            }
+            else {
+                const tasks = [...state.tasks];
+                const foundIndex = tasks.findIndex(task => task._id === action.editedTask._id);
+                tasks[foundIndex] = action.editedTask;
+
+                return {
+                    ...newState,
+                    tasks: tasks
+                };
+            }
+
         }
         default: return state;
     }
