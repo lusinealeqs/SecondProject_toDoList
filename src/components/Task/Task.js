@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Card, Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faEdit, faCheck, faHistory } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faEdit, faCheck, faUndo } from '@fortawesome/free-solid-svg-icons';
 import styles from './task.module.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -52,7 +52,7 @@ class Task extends PureComponent {
                 />
                 <Card.Body>
                     <OverlayTrigger
-                        placement="left"
+                        placement="top"
                         overlay={
                             <Tooltip>
                                 <strong>See more!</strong>
@@ -65,10 +65,10 @@ class Task extends PureComponent {
                             <Card.Title>{data.title}</Card.Title>
                         </Link>
                     </OverlayTrigger>
-                    <Card.Text><b>Description:</b> {shortStr(data.description, 40)}</Card.Text>
-                    <Card.Text><b>Deadline:</b> {formatDate(data.date)}</Card.Text>
-                    <Card.Text><b>Created:</b> {formatDate(data.created_at)}</Card.Text>
-                    <Card.Text><b>Status: </b>{data.status}</Card.Text>
+                    <Card.Text><b className={styles.options}>Description:</b> {shortStr(data.description, 40)}</Card.Text>
+                    <Card.Text><b className={styles.options}>Deadline:</b> {formatDate(data.date)}</Card.Text>
+                    <Card.Text><b className={styles.options}>Created:</b> {formatDate(data.created_at)}</Card.Text>
+                    <Card.Text><b className={styles.options}>Status: </b>{data.status}</Card.Text>
                     {
                         data.status === "active" ?
                             <OverlayTrigger
@@ -105,7 +105,7 @@ class Task extends PureComponent {
                                     onClick={() => this.props.changeTaskStatus(data._id, { status: 'active' })}
                                     disabled={disabled}
                                 >
-                                    <FontAwesomeIcon icon={faHistory} />
+                                    <FontAwesomeIcon icon={faUndo} />
                                 </Button>
                             </OverlayTrigger>
                     }

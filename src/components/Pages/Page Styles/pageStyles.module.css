@@ -68,3 +68,9 @@
     border-radius: 20px;
     text-align: center;
 }
+.options{
+    color: #138496;
+}
+.done{
+    opacity: 0.5;
+}

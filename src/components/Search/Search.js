@@ -171,16 +171,14 @@ function Search(props) {
                 </DropdownButton>
             </InputGroup>
 
-            <div
-                className={styles.dateOptions}
-            >
+            <div className={styles.dateOptions}>
                 {
                     dateOptions.map(option =>
                         <div
                             key={option.value}
                         >
-                            <span>{option.label}</span>
                             <DatePicker
+                                placeholderText={option.label}
                                 selected={dates[option.value]}
                                 onChange={(value) => setDates({
                                     ...dates,

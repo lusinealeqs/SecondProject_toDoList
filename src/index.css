@@ -17,7 +17,6 @@ code {
   text-align: center; 
   font-family: 'Times New Roman', Times, serif;
   margin-top: 10px;
-  color: palevioletred;
 }
 .not-found{
   margin-top: 1%;
@@ -44,7 +43,7 @@ code {
   text-decoration: none;
 }
 .activeLink{
-  color: pink;
+  color: #28a745;
   font-weight: bold;
 }
 .activeLink:hover{
@@ -53,7 +52,8 @@ code {
 .homePageNav:hover{
   text-decoration: none;
   padding: 5px 10px;
-  background-color: pink;
+  color: #28a745;
+  border: 2px solid #28a745;
   border-radius: 8px;
 }
 .navLinks{
@@ -62,15 +62,15 @@ code {
 .navLinks:hover{
   text-decoration: none;
   padding: 5px 10px;
-  background-color: pink;
+  color: #28a745;
+  border: 2px solid #28a745;
   border-radius: 8px;
 }
-.navbarMenu{
-  border-radius: 100px;
-  border-bottom: solid 5px black;
-  margin-top: 1%;
+.mainFooter{
+  margin-top: 19%;
 }
-.footerPart{
+.footerText{
   font-size: 16px;
   padding-left: 5px;
+  margin-bottom: 50%;
 }
