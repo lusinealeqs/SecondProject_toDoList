@@ -11,7 +11,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import NavMenu from './components/NavMenu'
 import { ToastContainer, toast } from 'react-toastify';
 import { connect } from 'react-redux';
-// import Footer from './components/Footer'
+import Footer from './components/Footer'
 
 class App extends PureComponent {
   
@@ -29,13 +29,12 @@ class App extends PureComponent {
     const { showSpinner } = this.props;
     return (
       <>
+      <NavMenu />
         <div className='app'>
-          <NavMenu />
           <Switch>
             <Route path='/' exact component={Todo} />
             <Route path='/task/:id' exact component={SingleTask} />
             <Route path='/about' exact component={About} />
-            {/* <Route path='/contact' exact component={Contact} /> */}
             <Route path='/not-found' exact component={NotFound} />
             <Redirect to='/not-found' />
           </Switch>
@@ -50,8 +49,8 @@ class App extends PureComponent {
             draggable
             pauseOnHover
           />
+          <Footer />
         </div>
-        {/* <Footer /> */}
         {showSpinner && <Spinner />}
       </>
     );

@@ -49,10 +49,10 @@ class SingleTask extends PureComponent {
                     task ?
                         <div className={styles.singlePage}>
                             <div className={styles.singlePageInnerDiv}>
-                                <p><b>Title:</b> {task.title}</p>
-                                <p><b>Description:</b> {task.description}</p>
-                                <p><b>Deadline:</b> {formatDate(task.date)}</p>
-                                <p><b>Created:</b> {formatDate(task.created_at)}</p>
+                                <p><b className={styles.options}>Title:</b> {task.title}</p>
+                                <p><b className={styles.options}>Description:</b> {task.description}</p>
+                                <p><b className={styles.options}>Deadline:</b> {formatDate(task.date)}</p>
+                                <p><b className={styles.options}>Created:</b> {formatDate(task.created_at)}</p>
                                 <OverlayTrigger
                                     placement="top"
                                     overlay={
@@ -64,7 +64,7 @@ class SingleTask extends PureComponent {
                                     <Button
                                         title='Edit'
                                         className='m-1'
-                                        variant="info"
+                                        variant="outline-info"
                                         onClick={this.toggleEditModal}
                                     >
                                         <FontAwesomeIcon icon={faEdit} />
@@ -82,7 +82,7 @@ class SingleTask extends PureComponent {
                                     <Button
                                         title='Remove'
                                         className='m-1'
-                                        variant="danger"
+                                        variant="outline-danger"
                                         onClick={this.handleRemove}
                                     >
                                         <FontAwesomeIcon icon={faTrash} />
@@ -107,7 +107,7 @@ const mapStateToProps = (state) => {
     return {
         task: state.task,
         removeTaskSuccess: state.removeTaskSuccess,
-        editTaskSuccess: state.editTaskSuccess
+        editTaskSuccess: state.editTaskSuccess,
     };
 }
 

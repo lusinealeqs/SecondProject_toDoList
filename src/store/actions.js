@@ -73,7 +73,7 @@ export function removeTasks(data) {
     return (dispatch) => {
         dispatch({ type: actionTypes.REMOVING_TASKS });
 
-        request(`${apiUrl}/task/`, 'DELETE', data)
+        request(`${apiUrl}/task/`, 'PATCH', data)
             .then(() => {
                 dispatch({ type: actionTypes.REMOVE_TASKS_SUCCESS, taskIds: data.tasks });
             })
