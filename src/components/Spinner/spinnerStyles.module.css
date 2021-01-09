@@ -47,4 +47,16 @@
     100% {
       transform: rotate(360deg);
     }
-  }
+  } 
+
+.text{
+  margin-top: 100%;
+  font-size: 32px;
+  color: #007bff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bolder;
+  font-family: 'Times New Roman', Times, serif;
+  letter-spacing: 1px;
+}

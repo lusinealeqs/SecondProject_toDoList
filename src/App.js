@@ -3,15 +3,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 import Todo from './components/Pages/ToDo';
 import './Style/body.css'
-import SingleTask from './components/Pages/SingleTask'
-import NotFound from './components/Pages/NotFound'
-import About from './components/Pages/About'
+import SingleTask from './components/Pages/SingleTask/SingleTask'
+import NotFound from './components/Pages/NotFound/NotFound'
+// import About from './components/Pages/About'
 import Spinner from './components/Spinner/Spinner';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import NavMenu from './components/NavMenu'
+import NavMenu from './components/NavMenu/NavMenu'
+import Register from './components/Pages/Register/Register';
 import { ToastContainer, toast } from 'react-toastify';
 import { connect } from 'react-redux';
-import Footer from './components/Footer'
+// import Footer from './components/Footer'
 
 class App extends PureComponent {
   
@@ -34,8 +35,9 @@ class App extends PureComponent {
           <Switch>
             <Route path='/' exact component={Todo} />
             <Route path='/task/:id' exact component={SingleTask} />
-            <Route path='/about' exact component={About} />
+            {/* <Route path='/about' exact component={About} /> */}
             <Route path='/not-found' exact component={NotFound} />
+            <Route path='/register' exact component={Register} />
             <Redirect to='/not-found' />
           </Switch>
           <ToastContainer
@@ -49,7 +51,7 @@ class App extends PureComponent {
             draggable
             pauseOnHover
           />
-          <Footer />
+          {/* <Footer /> */}
         </div>
         {showSpinner && <Spinner />}
       </>

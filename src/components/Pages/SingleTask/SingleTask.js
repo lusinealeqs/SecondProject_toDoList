@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
 import { Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
-import styles from '../Pages/Page Styles/pageStyles.module.css';
-import EditTaskModal from '../EditTaskModal';
-import { getTask, removeTask } from '../../store/actions';
+import { faTrash, faEdit, faCheck, faUndo } from '@fortawesome/free-solid-svg-icons';
+import styles from './singleTask.module.css';
+import EditTaskModal from '../../EditTaskModal';
+import { getTask, removeTask, changeTaskStatus } from '../../../store/actions';
 import { connect } from 'react-redux';
-import { formatDate } from '../../helpers/helpfulFunctions';
+import { formatDate } from '../../../helpers/helpfulFunctions';
 
 class SingleTask extends PureComponent {
     state = {
@@ -41,7 +41,7 @@ class SingleTask extends PureComponent {
 
     render() {
         const { isEdit } = this.state;
-        const { task } = this.props;
+        const { task, changeTaskStatus } = this.props;
 
         return (
             <>
@@ -53,6 +53,46 @@ class SingleTask extends PureComponent {
                                 <p><b className={styles.options}>Description:</b> {task.description}</p>
                                 <p><b className={styles.options}>Deadline:</b> {formatDate(task.date)}</p>
                                 <p><b className={styles.options}>Created:</b> {formatDate(task.created_at)}</p>
+                                <p><b className={styles.options}>Status:</b> {task.status}</p>
+                                <div className={styles.buttons}>
+                                {
+                                    task.status === "active" ?
+                                        <OverlayTrigger
+                                            placement="top"
+                                            overlay={
+                                                <Tooltip>
+                                                    <strong>Mark task done</strong>
+                                                </Tooltip>
+                                            }
+                                        >
+                                            <Button
+                                                title='Mark task done'
+                                                className='m-1'
+                                                variant="success"
+                                                onClick={() => changeTaskStatus(task._id, { status: 'done' }, 'single')}
+                                            >
+                                                <FontAwesomeIcon icon={faCheck} />
+                                            </Button>
+                                        </OverlayTrigger>
+                                        :
+                                        <OverlayTrigger
+                                            placement="bottom"
+                                            overlay={
+                                                <Tooltip>
+                                                    <strong>Mark task active</strong>
+                                                </Tooltip>
+                                            }
+                                        >
+                                            <Button
+                                                title='Mark as active'
+                                                className='m-1'
+                                                variant="warning"
+                                                onClick={() => changeTaskStatus(task._id, { status: 'active' }, 'single')}
+                                            >
+                                                <FontAwesomeIcon icon={faUndo} />
+                                            </Button>
+                                        </OverlayTrigger>
+                                }
                                 <OverlayTrigger
                                     placement="top"
                                     overlay={
@@ -88,7 +128,7 @@ class SingleTask extends PureComponent {
                                         <FontAwesomeIcon icon={faTrash} />
                                     </Button>
                                 </OverlayTrigger>
-
+                                </div>
                                 {isEdit &&
                                     <EditTaskModal
                                         data={task}
@@ -113,6 +153,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     getTask,
-    removeTask
+    removeTask,
+    changeTaskStatus
 };
-export default connect(mapStateToProps, mapDispatchToProps)(SingleTask); 
+export default connect(mapStateToProps, mapDispatchToProps)(SingleTask);

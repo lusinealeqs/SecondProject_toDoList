@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Card, Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
+import { Card, Button, Tooltip, OverlayTrigger, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEdit, faCheck, faUndo } from '@fortawesome/free-solid-svg-icons';
 import styles from './task.module.css';
@@ -44,103 +44,103 @@ class Task extends PureComponent {
         }
 
         return (
-            <Card className={cardClasses.join(' ')}>
-                <input
-                    type='checkbox'
-                    className={styles.checkbox}
-                    onClick={this.toggleCheckbox}
-                />
-                <Card.Body>
-                    <OverlayTrigger
-                        placement="top"
-                        overlay={
-                            <Tooltip>
-                                <strong>See more!</strong>
-                            </Tooltip>
-                        }>
-                        <Link
-                            to={`/task/${data._id}`}
-                            className={styles.taskLinks}
-                        >
-                            <Card.Title>{data.title}</Card.Title>
-                        </Link>
-                    </OverlayTrigger>
-                    <Card.Text><b className={styles.options}>Description:</b> {shortStr(data.description, 40)}</Card.Text>
-                    <Card.Text><b className={styles.options}>Deadline:</b> {formatDate(data.date)}</Card.Text>
-                    <Card.Text><b className={styles.options}>Created:</b> {formatDate(data.created_at)}</Card.Text>
-                    <Card.Text><b className={styles.options}>Status: </b>{data.status}</Card.Text>
-                    {
-                        data.status === "active" ?
-                            <OverlayTrigger
-                                placement="bottom"
-                                overlay={
-                                    <Tooltip>
-                                        <strong>Mark task done</strong>
-                                    </Tooltip>
-                                }
-                            >
-                                <Button
-                                    title='Mark task done'
-                                    className='m-1'
-                                    variant="success"
-                                    onClick={() => this.props.changeTaskStatus(data._id, { status: 'done' })}
-                                    disabled={disabled}
+            <Card className={`${styles.card} ${cardClasses.join(' ')}`}>
+                <Col>
+                    <Card.Body>
+                        <div className={styles.titleXcheckbox}>
+                            <Card.Title>
+                                <Link
+                                    to={`/task/${data._id}`}
+                                    className={styles.taskLinks}
                                 >
-                                    <FontAwesomeIcon icon={faCheck} />
-                                </Button>
-                            </OverlayTrigger>
-                            :
-                            <OverlayTrigger
-                                placement="bottom"
-                                overlay={
-                                    <Tooltip>
-                                        <strong>Mark task active</strong>
-                                    </Tooltip>
-                                }
-                            >
-                                <Button
-                                    title='Mark as active'
-                                    className='m-1'
-                                    variant="warning"
-                                    onClick={() => this.props.changeTaskStatus(data._id, { status: 'active' })}
-                                    disabled={disabled}
+                                    {data.title}
+                                </Link>
+                            </Card.Title>
+                            <div>
+                                <input
+                                    type='checkbox'
+                                    className={styles.checkbox}
+                                    onClick={this.toggleCheckbox}
+                                />
+                            </div>
+                        </div>
+                        <Card.Text><b className={styles.options}>Description:</b> {shortStr(data.description, 40)}</Card.Text>
+                        <Card.Text><b className={styles.options}>Deadline:</b> {formatDate(data.date)}</Card.Text>
+                        <Card.Text><b className={styles.options}>Created:</b> {formatDate(data.created_at)}</Card.Text>
+                        <Card.Text><b className={styles.options}>Status: </b>{data.status}</Card.Text>
+                        {
+                            data.status === "active" ?
+                                <OverlayTrigger
+                                    placement="bottom"
+                                    overlay={
+                                        <Tooltip>
+                                            <strong>Mark task done</strong>
+                                        </Tooltip>
+                                    }
                                 >
-                                    <FontAwesomeIcon icon={faUndo} />
-                                </Button>
-                            </OverlayTrigger>
-                    }
-                    <OverlayTrigger
-                        placement="bottom"
-                        overlay={
-                            <Tooltip>
-                                <strong>Edit</strong>
-                            </Tooltip>
-                        }>
-                        <Button
-                            className='m-1'
-                            variant="outline-dark"
-                            onClick={onEdit}
-                            disabled={disabled}
-                        >
-                            <FontAwesomeIcon icon={faEdit} />
-                        </Button>
-                    </OverlayTrigger>
-                    <OverlayTrigger
-                        placement="bottom"
-                        overlay={
-                            <Tooltip>
-                                <strong>Remove</strong>
-                            </Tooltip>
-                        }>
-                        <Button
-                            className='m-1'
-                            variant="outline-dark"
-                            onClick={() => removeTask(data._id)}
-                            disabled={disabled}>
-                            <FontAwesomeIcon icon={faTrash} />
-                        </Button>
-                    </OverlayTrigger>
-                </Card.Body>
+                                    <Button
+                                        title='Mark task done'
+                                        className='m-1'
+                                        variant="success"
+                                        onClick={() => this.props.changeTaskStatus(data._id, { status: 'done' }, 'tasks')}
+                                        disabled={disabled}
+                                    >
+                                        <FontAwesomeIcon icon={faCheck} />
+                                    </Button>
+                                </OverlayTrigger>
+                                :
+                                <OverlayTrigger
+                                    placement="bottom"
+                                    overlay={
+                                        <Tooltip>
+                                            <strong>Mark task active</strong>
+                                        </Tooltip>
+                                    }
+                                >
+                                    <Button
+                                        title='Mark as active'
+                                        className='m-1'
+                                        variant="warning"
+                                        onClick={() => this.props.changeTaskStatus(data._id, { status: 'active' }, 'tasks')}
+                                        disabled={disabled}
+                                    >
+                                        <FontAwesomeIcon icon={faUndo} />
+                                    </Button>
+                                </OverlayTrigger>
+                        }
+                        <OverlayTrigger
+                            placement="bottom"
+                            overlay={
+                                <Tooltip>
+                                    <strong>Edit</strong>
+                                </Tooltip>
+                            }>
+                            <Button
+                                className='m-1'
+                                variant="outline-dark"
+                                onClick={onEdit}
+                                disabled={disabled}
+                            >
+                                <FontAwesomeIcon icon={faEdit} />
+                            </Button>
+                        </OverlayTrigger>
+                        <OverlayTrigger
+                            placement="bottom"
+                            overlay={
+                                <Tooltip>
+                                    <strong>Remove</strong>
+                                </Tooltip>
+                            }>
+                            <Button
+                                className='m-1'
+                                variant="outline-dark"
+                                onClick={() => removeTask(data._id)}
+                                disabled={disabled}>
+                                <FontAwesomeIcon icon={faTrash} />
+                            </Button>
+                        </OverlayTrigger>
+                    </Card.Body>
+                </Col>
             </Card>
         );
     }
