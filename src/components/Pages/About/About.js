@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../Pages/Page Styles/pageStyles.module.css';
+import styles from './about.module.css';
 import aboutTodo from './Page images/aboutTodo.jpg'
 import { Card } from 'react-bootstrap';
 import Masis from './Page images/Masis.jpg'

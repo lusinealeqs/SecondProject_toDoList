@@ -11,37 +11,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-.title{
-  font-size: 36px;
-  text-align: center; 
-  font-family: 'Times New Roman', Times, serif;
-  margin-top: 10px;
-}
-.not-found{
-  margin-top: 1%;
-  font-size: 68px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.not-foundIcon{
-  font-size: 120px;
-  display: flex;
-  justify-content: center;
-  margin-top: 1%;
-  color: brown;
-  cursor: pointer;
-}
-.not-foundIcon:hover {
-  color: #ff0000;
-}
-.buttonBack{
-  display: flex;
-  justify-content: center;
-  margin-top: 5%;
-  text-decoration: none;
-}
 .activeLink{
   color: #28a745;
   font-weight: bold;
@@ -67,7 +36,7 @@ code {
   border-radius: 8px;
 }
 .mainFooter{
-  margin-top: 19%;
+  margin-top: 26%;
 }
 .footerText{
   font-size: 16px;

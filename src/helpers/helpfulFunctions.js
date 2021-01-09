@@ -1,5 +1,5 @@
 export function formatDate(dateStr = "") {
-    return dateStr.slice(0, 10);
+    return dateStr.slice(0, 10).split('-').reverse().join('.');;
 }
 
 export function shortStr(str = "", length = 0) {

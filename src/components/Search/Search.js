@@ -56,19 +56,19 @@ const sortOptions = [
 
 const dateOptions = [
     {
-        label: 'Create lte',
+        label: 'Creation before "DATE"',
         value: 'create_lte'
     },
     {
-        label: 'Create gte',
+        label: 'Creation after "DATE"',
         value: 'create_gte'
     },
     {
-        label: 'Complete lte',
+        label: 'Completion before "DATE" ',
         value: 'complete_lte'
     },
     {
-        label: 'Complete gte',
+        label: 'Completion after "DATE"',
         value: 'complete_gte'
     }
 
@@ -168,10 +168,34 @@ function Search(props) {
                             </Dropdown.Item>
                         )
                     }
+                    <div className={styles.dateOptions}>
+                {
+                    dateOptions.map(option =>
+                        <div
+                            key={option.value}
+                        >
+                            <DatePicker
+                                className={styles.optionLabels}
+                                placeholderText={option.label}
+                                selected={dates[option.value]}
+                                onChange={(value) => setDates({
+                                    ...dates,
+                                    [option.value]: value
+                                })}
+                            />
+                        </div>
+                    )
+                }
+            </div>
                 </DropdownButton>
-            </InputGroup>
+            {/* </InputGroup> */}
 
-            <div className={styles.dateOptions}>
+            {/* <DropdownButton
+                    as={InputGroup.Append}
+                    variant="outline-dark"
+                    title={sort.value ? shortStr(sort.label, 5) : "Sort"}
+                >
+                    <div className={styles.dateOptions}>
                 {
                     dateOptions.map(option =>
                         <div
@@ -189,6 +213,27 @@ function Search(props) {
                     )
                 }
             </div>
+                </DropdownButton> */}
+            </InputGroup>
+
+            {/* // <div className={styles.dateOptions}>
+            //     { */}
+            {/* //         dateOptions.map(option =>
+            //             <div
+            //                 key={option.value}
+            //             >
+            //                 <DatePicker
+            //                     placeholderText={option.label}
+            //                     selected={dates[option.value]}
+            //                     onChange={(value) => setDates({
+            //                         ...dates,
+            //                         [option.value]: value
+            //                     })}
+            //                 />
+            //             </div>
+            //         )
+            //     }
+            // </div> */}
         </div>
     )
 }

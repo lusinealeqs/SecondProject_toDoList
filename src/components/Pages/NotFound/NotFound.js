@@ -2,13 +2,14 @@ import React from 'react';
 import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import styles from './notFound.module.css'
 
 export default function NotFound() {
     return (
         <>
-            <div className="not-found">OOPS...</div>
-            <h6 className="not-found">We couldn't find what you were searching! :(</h6>
-            <div className="not-found">Try again later!</div>
+            <div className={styles.notFound}>OOPS...</div>
+            <div className={styles.notFound}>We couldn't find what you were searching! :(</div>
+            <div className={styles.notFound}>It's okay. Try again later!</div>
             <OverlayTrigger
                 placement="bottom"
                 overlay={
@@ -16,15 +17,15 @@ export default function NotFound() {
                         <strong>404</strong>
                     </Tooltip>
                 }>
-                <div className="not-foundIcon">
+                <div className={styles.notFoundIcon}>
                     <FontAwesomeIcon icon={faExclamationTriangle} className='not-foundIcon' />
                 </div>
             </OverlayTrigger>
-            <div className='buttonBack'>
+            <div className={styles.buttonBack}>
                 <Button
                     href="/"
                     variant="outline-primary"
-                    className='m-3 buttonText'>
+                    className='m-3'>
                     Back to home page
                 </Button>
             </div>

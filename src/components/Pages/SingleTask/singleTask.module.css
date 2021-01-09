@@ -1,0 +1,31 @@
+.singlePage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 6%;
+}
+.singlePageInnerDiv{
+    width: 50%;
+    font-size: 18px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 20px;
+    /* text-align: center;     */
+    border-bottom: 1px solid;
+    border-left: 1px solid;
+    border-right: 1px solid;
+    box-shadow: 10px 10px 5px grey ;
+}
+.options{
+    color: #138496;
+}
+.buttons{
+    text-align: end;
+}
+.done{
+    opacity: 0.7;
+    /* background-color: rgb(179, 205, 223); */
+    /* Can't choose between these two */
+    background-color: rgb(179, 223, 185);
+
+}

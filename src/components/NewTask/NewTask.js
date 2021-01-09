@@ -129,6 +129,7 @@ class NewTask extends PureComponent {
                             selected={this.state.date}
                             minDate={new Date()}
                             onChange={(value) => this.handleChange('date', value)}
+                            dateFormat="dd.MM.yyyy"
                         />
                     </div>
                 </Modal.Body>

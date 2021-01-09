@@ -1,0 +1,32 @@
+.navbarMenu{
+  /* border-bottom: 1px solid; */
+  /* box-shadow: 0px 5px 5px grey ; */
+  border-radius: 10px;
+  /* width: 50%; */
+  display: flex;
+  justify-content: center;
+}
+.activeLink{
+    color: #28a745;
+    font-weight: bold;
+  }
+.activeLink:hover{
+  text-decoration: none;
+}
+.homePageNav:hover{
+  text-decoration: none;
+  padding: 5px 10px;
+  color: #28a745;
+  border: 2px solid #28a745;
+  border-radius: 8px;
+}
+.navLinks{
+  padding-right: 15px;
+}
+.navLinks:hover{
+  text-decoration: none;
+  padding: 5px 10px;
+  color: #28a745;
+  border: 2px solid #28a745;
+  border-radius: 8px;
+}

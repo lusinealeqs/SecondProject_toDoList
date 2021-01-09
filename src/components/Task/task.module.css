@@ -1,14 +1,21 @@
-.checkbox{
-    margin: 10px 5px 0px 255px;
+.titleXcheckbox{
+    display: flex;
+    justify-content: space-between;
 }
 .task{
     margin: 20px auto 20px;
-    width: 18rem;
+    width: 20rem;
     border-radius: 10px;
     background-color: white;
 }
 .done{
-    opacity: 0.5;
+    opacity: 0.7;
+    /* background-color: rgb(179, 205, 223); */
+    /* Can't choose between these two */
+    background-color: rgb(179, 223, 185);
+}
+.checkbox{
+    cursor: pointer;
 }
 .checked{
     background-color: #DC3545; 
@@ -27,3 +34,15 @@
 .options{
     color: rgb(153, 153, 153);
 }
+
+@media only screen and (max-width: 767px) {
+    .card{
+        width: 100%;
+    }
+  }
+
+  /* @media only screen and (max-width: 743px) {
+    .card{
+        width: 100%;
+    }
+  } */
