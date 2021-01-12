@@ -13,7 +13,7 @@ const defaultState = {
     successMessage: null
 };
 
-export const mainReducer = (state = defaultState, action) => {
+export const taskReducer = (state = defaultState, action) => {
 
     const loadingState = {
         ...state,

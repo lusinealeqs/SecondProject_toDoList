@@ -2,32 +2,39 @@ import React, { PureComponent } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 import Todo from './components/Pages/ToDo';
-import './Style/body.css'
-import SingleTask from './components/Pages/SingleTask/SingleTask'
-import NotFound from './components/Pages/NotFound/NotFound'
-// import About from './components/Pages/About'
+import './Style/body.css';
+import SingleTask from './components/Pages/SingleTask/SingleTask';
+import NotFound from './components/Pages/NotFound/NotFound';
+// import About from './components/Pages/About';
 import Spinner from './components/Spinner/Spinner';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import NavMenu from './components/NavMenu/NavMenu'
+import NavMenu from './components/NavMenu/NavMenu';
 import Register from './components/Pages/Register/Register';
+import Login from './components/Pages/Login/Login'
 import { ToastContainer, toast } from 'react-toastify';
 import { connect } from 'react-redux';
-// import Footer from './components/Footer'
+// import Footer from './components/Footer';
 
 class App extends PureComponent {
   
   componentDidUpdate() {
-    const { errorMessage, successMessage } = this.props;
+    const { errorMessage, successMessage, authErrorMessage, authSuccessMessage } = this.props;
     if (errorMessage) {
       toast.error(errorMessage);
     }
     if (successMessage) {
       toast.success(successMessage);
     }
+    if (authErrorMessage) {
+      toast.error(authErrorMessage);
+    }
+    if (authSuccessMessage) {
+      toast.success(authSuccessMessage);
+    }
   }
 
   render() {
-    const { showSpinner } = this.props;
+    const { showSpinner, showAuthSpinner  } = this.props;
     return (
       <>
       <NavMenu />
@@ -38,6 +45,7 @@ class App extends PureComponent {
             {/* <Route path='/about' exact component={About} /> */}
             <Route path='/not-found' exact component={NotFound} />
             <Route path='/register' exact component={Register} />
+            <Route path='/login' exact component={Login} />
             <Redirect to='/not-found' />
           </Switch>
           <ToastContainer
@@ -53,7 +61,7 @@ class App extends PureComponent {
           />
           {/* <Footer /> */}
         </div>
-        {showSpinner && <Spinner />}
+        {(showSpinner || showAuthSpinner) && <Spinner />}
       </>
     );
   }
@@ -61,9 +69,12 @@ class App extends PureComponent {
 
 const mapStateToProps = (state) => {
   return {
-    errorMessage: state.error,
-    successMessage: state.successMessage,
-    showSpinner: state.loading,
+    errorMessage: state.taskReducer.error,
+    successMessage: state.taskReducer.successMessage,
+    authErrorMessage: state.authReducer.error,
+    authSuccessMessage: state.authReducer.successMessage,
+    showSpinner: state.taskReducer.loading,
+    showAuthSpinner: state.authReducer.loading
   }
 }
 

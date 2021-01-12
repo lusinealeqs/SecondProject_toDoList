@@ -76,7 +76,7 @@ class ToDo extends PureComponent {
     render() {
         const { checkedTasks, showConfirm, editTask } = this.state;
         const { tasks } = this.props;
-        
+
         const tasksComponents = tasks.map((task) =>
             <Col key={task._id} xl={3} lg={4} md={6}>
                 <Task
@@ -137,10 +137,10 @@ class ToDo extends PureComponent {
 
 const mapStateToProps = (state) => {
     return {
-        tasks: state.tasks,
-        addTaskSuccess: state.addTaskSuccess,
-        removeTasksSuccess: state.removeTasksSuccess,
-        editTaskSuccess: state.editTaskSuccess
+        tasks: state.taskReducer.tasks,
+        addTaskSuccess: state.taskReducer.addTaskSuccess,
+        removeTasksSuccess: state.taskReducer.removeTasksSuccess,
+        editTaskSuccess: state.taskReducer.editTaskSuccess
     };
 };
 

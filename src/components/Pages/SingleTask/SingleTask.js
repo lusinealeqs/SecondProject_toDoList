@@ -145,9 +145,9 @@ class SingleTask extends PureComponent {
 
 const mapStateToProps = (state) => {
     return {
-        task: state.task,
-        removeTaskSuccess: state.removeTaskSuccess,
-        editTaskSuccess: state.editTaskSuccess,
+        task: state.taskReducer.task,
+        removeTaskSuccess: state.taskReducer.removeTaskSuccess,
+        editTaskSuccess: state.taskReducer.editTaskSuccess
     };
 }
 

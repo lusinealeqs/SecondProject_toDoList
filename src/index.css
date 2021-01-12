@@ -11,30 +11,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-.activeLink{
-  color: #28a745;
-  font-weight: bold;
-}
-.activeLink:hover{
-  text-decoration: none;
-}
-.homePageNav:hover{
-  text-decoration: none;
-  padding: 5px 10px;
-  color: #28a745;
-  border: 2px solid #28a745;
-  border-radius: 8px;
-}
-.navLinks{
-  padding-right: 15px;
-}
-.navLinks:hover{
-  text-decoration: none;
-  padding: 5px 10px;
-  color: #28a745;
-  border: 2px solid #28a745;
-  border-radius: 8px;
-}
 .mainFooter{
   margin-top: 26%;
 }
