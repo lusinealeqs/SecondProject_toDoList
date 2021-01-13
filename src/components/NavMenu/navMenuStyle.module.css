@@ -5,6 +5,7 @@
   /* width: 50%; */
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 .activeLink{
     color: #28a745;
@@ -13,20 +14,28 @@
 .activeLink:hover{
   text-decoration: none;
 }
+.homePageNav{
+  padding: 5px 10px;
+}
 .homePageNav:hover{
   text-decoration: none;
   padding: 5px 10px;
   color: #28a745;
-  border: 2px solid #28a745;
+  background-color: #7dc78e65;
   border-radius: 8px;
 }
 .navLinks{
-  padding-right: 15px;
+  font-size: 18px;
+  padding: 5px 10px;
+  margin-right: 2%;
 }
 .navLinks:hover{
   text-decoration: none;
-  padding: 5px 10px;
   color: #28a745;
-  border: 2px solid #28a745;
+  background-color: #7dc78e65;
   border-radius: 8px;
+}
+.logOutDiv{
+  color: #28a745;
+  background-color: #7dc78e65;
 }
