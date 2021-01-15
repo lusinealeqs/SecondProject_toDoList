@@ -1,38 +1,33 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
+import {connect} from 'react-redux';
+import {login} from '../../../store/userActions';
+import { Link } from 'react-router-dom';
 import styles from './loginStyle.module.css';
 
-function Login() {
+function Login(props) {
     const [values, setValues] = useState({
         email: '',
-        password: '',
-        confirmPassword: ''
+        password: ''
     });
 
     const [errors, setErrors] = useState({
         email: null,
-        password: null,
-        confirmPassword: null
+        password: null
     });
 
     const handleSubmit = () => {
-        const { email, password, confirmPassword } = values;
-
-        let passwordMessage = null;
-        if (!confirmPassword) {
-            passwordMessage = 'Password is required';
-        }
-        else if (password !== confirmPassword) {
-            passwordMessage = "Passwords didn't match"
-        }
+        const { email, password } = values;
 
         setErrors({
             email: email ? null : 'Email is required',
-            confirmPassword: passwordMessage,
             password: password ? null : 'Password is required'
         });
-        console.log(values);
+
+        if(email && password){
+            console.log(values);
+            props.login(values);
+        }
     };
 
     const handleChange = ({ target: { name, value } }) => {
@@ -95,11 +90,11 @@ function Login() {
                             </div>
                             <div className={styles.lastText}>
                                 <span>Don't have an account? </span>
-                                <NavLink
+                                <Link
                                     exact
                                     to='/register'>
                                      Register for free
-                                </NavLink>
+                                </Link>
                             </div>
                         </Form>
                     </Col>
@@ -110,4 +105,9 @@ function Login() {
     );
 }
 
-export default Login;
+// export default Login;
+const mapDispatchToProps = {
+    login
+};
+
+export default connect(null, mapDispatchToProps)(Login);

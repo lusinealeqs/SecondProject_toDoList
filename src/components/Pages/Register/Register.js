@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { register } from '../../../store/userActions';
 import styles from './registerStyle.module.css';
@@ -161,11 +161,11 @@ function Register(props) {
                             </div>
                             <div className={styles.lastText}>
                                 <span>Already have an account? </span>
-                                <NavLink
+                                <Link
                                     exact
                                     to='/login'>
                                     Log In
-                                </NavLink>
+                                </Link>
                             </div>
                         </Form>
                     </Col>

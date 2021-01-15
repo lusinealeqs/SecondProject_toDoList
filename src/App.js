@@ -5,7 +5,8 @@ import Todo from './components/Pages/ToDo';
 import './Style/body.css';
 import SingleTask from './components/Pages/SingleTask/SingleTask';
 import NotFound from './components/Pages/NotFound/NotFound';
-// import About from './components/Pages/About';
+import About from './components/Pages/About/About';
+import Contact from './components/Pages/Contact/Contact'
 import Spinner from './components/Spinner/Spinner';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import NavMenu from './components/NavMenu/NavMenu';
@@ -42,7 +43,8 @@ class App extends PureComponent {
           <Switch>
             <Route path='/' exact component={Todo} />
             <Route path='/task/:id' exact component={SingleTask} />
-            {/* <Route path='/about' exact component={About} /> */}
+            <Route path='/about' exact component={About} />
+            <Route path='/contact' exact component={Contact} />
             <Route path='/not-found' exact component={NotFound} />
             <Route path='/register' exact component={Register} />
             <Route path='/login' exact component={Login} />
