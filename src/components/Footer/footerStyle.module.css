@@ -1,0 +1,15 @@
+.mainFooter{
+    /* position: absolute; */
+    /* bottom: 0; */
+    background: #444444;
+    height: 59px;
+    /* margin-top: 18%; */
+    font-family: 'Open Sans', sans-serif;
+    color: #FFFFFF;
+    padding: 20px;
+}
+/* .footerText{
+    font-size: 16px;
+    padding-left: 5px;
+    margin-bottom: 50%;
+} */
