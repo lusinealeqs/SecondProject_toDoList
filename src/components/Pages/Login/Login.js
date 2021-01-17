@@ -30,7 +30,6 @@ function Login(props) {
         });
 
         if (email && password) {
-            console.log("Here is your login and password", values);
             props.login(values);
         }
     };

@@ -12,10 +12,10 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import NavMenu from "./components/NavMenu/NavMenu";
 import Register from "./components/Pages/Register/Register";
 import Login from "./components/Pages/Login/Login";
+import Footer from "./components/Footer/Footer";
 import CustomRoute from "./components/CustomRoute";
 import { ToastContainer, toast } from "react-toastify";
 import { connect } from "react-redux";
-import Footer from "./components/Footer/Footer";
 
 class App extends PureComponent {
     componentDidUpdate() {
