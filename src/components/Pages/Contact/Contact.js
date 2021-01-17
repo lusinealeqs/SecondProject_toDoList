@@ -1,8 +1,8 @@
-import React from 'react';
-import styles from './contact.module.css';
-import { Container, Row, Col } from 'react-bootstrap';
+import React from "react";
+import styles from "./contact.module.css";
+import { Container, Row, Col } from "react-bootstrap";
 
-export default function About() {
+export default function Contact() {
     return (
         <div className={styles.main}>
             <Container className={styles.mainInner}>
@@ -10,12 +10,14 @@ export default function About() {
                     <Col xs={12} sm={8} md={6}>
                         <div className={styles.inner}>
                             <h3 className={styles.heading}>Contact Us</h3>
-                            <p>Feel free to get in touch with us whenever you need some help.</p>
+                            <p>
+                                Feel free to get in touch with us whenever you
+                                need some help.
+                            </p>
                         </div>
                     </Col>
                 </Row>
             </Container>
-
         </div>
-    )
+    );
 }
