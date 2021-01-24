@@ -21,28 +21,62 @@ function Register(props) {
     });
 
     const handleSubmit = () => {
-        const { name, surname, email, password, confirmPassword } = values;
+        let { name, surname, email, password, confirmPassword } = values;
+
+        const regexpEmail = new RegExp(
+            /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
+        );
+        const testEmail = regexpEmail.test(email);
+
+        // name = name.trim();
+        // surname = surname.trim();
+        // email = email.trim();
+
         let valid = true;
 
-        let passwordMessage = null;
+        let nameError = null;
+        let surnameError = null;
+        let emailError = null;
+        let passwordError = null;
+        let confirmPasswordError = null;
+
+        if (!name) {
+            nameError = "Name is required!";
+            valid = false;
+        }
+        if (!surname) {
+            surnameError = "Surname is required!";
+            valid = false;
+        }
+        if (!testEmail) {
+            emailError = "Email is invalid!";
+            valid = false;
+        }
+        if (!email) {
+            emailError = "Email is required!";
+            valid = false;
+        }
+        if (!password) {
+            passwordError = "Password is required!";
+            valid = false;
+        }
         if (!confirmPassword) {
-            passwordMessage = "Password is required";
+            confirmPasswordError = "Confirm your password!";
             valid = false;
         } else if (password !== confirmPassword) {
-            passwordMessage = "Passwords didn't match";
+            passwordError = "Passwords didn't match";
             valid = false;
         }
 
         setErrors({
-            email: email ? null : "Email is required",
-            confirmPassword: passwordMessage,
-            password: password ? null : "Password is required",
-            name: name ? null : "Please, type your name",
-            surname: surname ? null : "Please, type your surname",
+            email: emailError,
+            confirmPassword: confirmPasswordError,
+            password: passwordError,
+            name: nameError,
+            surname: surnameError,
         });
 
         if (valid) {
-            console.log(values);
             props.register(values);
         }
     };
@@ -81,7 +115,9 @@ function Register(props) {
                                     onChange={handleChange}
                                 />
                                 {
-                                    <Form.Text className="text-danger">
+                                    <Form.Text
+                                        className={` ${styles.formText} text-danger`}
+                                    >
                                         {errors.name}
                                     </Form.Text>
                                 }
@@ -99,7 +135,9 @@ function Register(props) {
                                     onChange={handleChange}
                                 />
                                 {
-                                    <Form.Text className="text-danger">
+                                    <Form.Text
+                                        className={` ${styles.formText} text-danger`}
+                                    >
                                         {errors.surname}
                                     </Form.Text>
                                 }
@@ -116,7 +154,9 @@ function Register(props) {
                                     onChange={handleChange}
                                 />
                                 {
-                                    <Form.Text className="text-danger">
+                                    <Form.Text
+                                        className={` ${styles.formText} text-danger`}
+                                    >
                                         {errors.email}
                                     </Form.Text>
                                 }
@@ -133,7 +173,9 @@ function Register(props) {
                                     name="password"
                                 />
                                 {
-                                    <Form.Text className="text-danger">
+                                    <Form.Text
+                                        className={` ${styles.formText} text-danger`}
+                                    >
                                         {errors.password}
                                     </Form.Text>
                                 }
@@ -151,7 +193,9 @@ function Register(props) {
                                     onChange={handleChange}
                                     name="confirmPassword"
                                 />
-                                <Form.Text className="text-danger">
+                                <Form.Text
+                                    className={` ${styles.formText} text-danger`}
+                                >
                                     {errors.confirmPassword}
                                 </Form.Text>
                             </Form.Group>

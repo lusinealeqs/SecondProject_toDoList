@@ -1,20 +1,19 @@
-import { store } from '../store/store';
-import { LOGOUT_SUCCESS } from '../store/userActionTypes';
-import { history } from '../helpers/history';
-import decode from 'jwt-decode';
+import { store } from "../store/store";
+import { LOGOUT_SUCCESS } from "../store/userActionTypes";
+import { history } from "../helpers/history";
+import decode from "jwt-decode";
 const apiUrl = process.env.REACT_APP_API_URL;
 
-
 export function saveJWT(data) {
-    localStorage.setItem('token', JSON.stringify(data));
+    localStorage.setItem("token", JSON.stringify(data));
 }
 
 export function removeJWT() {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
 }
 
 export function getJWT() {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (!token) {
         logout();
         return null;
@@ -28,9 +27,9 @@ export function getJWT() {
         return fetch(`${apiUrl}/user/${decoded.userId}/token`, {
             method: "PUT",
             headers: {
-                "Content-Type": 'application/json'
+                "Content-Type": "application/json",
             },
-            body: JSON.stringify({ refreshToken: parsed.refreshToken })
+            body: JSON.stringify({ refreshToken: parsed.refreshToken }),
         })
             .then((response) => response.json())
             .then((newToken) => {
@@ -50,38 +49,41 @@ export function getJWT() {
 }
 
 export function checkLoginStatus() {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (!token) {
         return false;
     }
     return true;
 }
 
-
 export function loginRequest(data) {
-    return request(data, 'login');
+    return request(data, "login");
 }
 
 export function registerRequest(data) {
-    return request(data, 'register');
+    return request(data, "register");
 }
 
+export function contactRequest(data) {
+    return request(data, "contact");
+}
 
 function request(data, type) {
     const config = {
-        method: 'POST',
+        method: "POST",
         headers: {
-            "Content-Type": 'application/json',
+            "Content-Type": "application/json",
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
     };
 
     let url;
-    if (type === 'login') {
+    if (type === "login") {
         url = `${apiUrl}/user/sign-in`;
-    }
-    else if (type === 'register') {
+    } else if (type === "register") {
         url = `${apiUrl}/user`;
+    } else if (type === "contact") {
+        url = `${apiUrl}/form`;
     }
 
     return fetch(url, config)
@@ -96,50 +98,15 @@ function request(data, type) {
 
 function logout() {
     store.dispatch({ type: LOGOUT_SUCCESS });
-    history.push('/login');
+    removeJWT();
+    history.push("/login");
 }
 
+export function getLocalJWT() {
+    const token = localStorage.getItem("token");
+    if (!token) {
+        return null;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//_______________________
-// export function saveJWT(data){
-//     localStorage.setItem('token', JSON.stringify(data));
-// }
-
-// export function removeJWT(){
-//     localStorage.removeItem('token');
-// }
-
-// export function getJWT(){
-//     const token = localStorage.getItem('token');
-//     if(!token){
-//         // throw error
-//     }
-
-//     return JSON.parse(token).jwt;
-// }
-
-// export function checkLoginStatus(){
-//     const token = localStorage.getItem('token');
-//     if(!token){
-//         return false;
-//     }
-//     //Check the deadline with Masis
-//     return true;
-// }
+    return JSON.parse(token).jwt;
+}
