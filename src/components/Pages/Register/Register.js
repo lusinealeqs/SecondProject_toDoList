@@ -7,30 +7,26 @@ import styles from "./registerStyle.module.css";
 
 function Register(props) {
     const [values, setValues] = useState({
+        name: "",
+        surname: "",
         email: "",
         password: "",
         confirmPassword: "",
     });
 
     const [errors, setErrors] = useState({
-        email: null,
-        password: null,
-        confirmPassword: null,
         name: "",
         surname: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
     });
 
     const handleSubmit = () => {
         let { name, surname, email, password, confirmPassword } = values;
 
-        const regexpEmail = new RegExp(
-            /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
-        );
+        const regexpEmail = /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i;
         const testEmail = regexpEmail.test(email);
-
-        // name = name.trim();
-        // surname = surname.trim();
-        // email = email.trim();
 
         let valid = true;
 
@@ -147,7 +143,7 @@ function Register(props) {
                                     type="email"
                                     name="email"
                                     className={
-                                        errors.password ? styles.invalid : ""
+                                        errors.email ? styles.invalid : ""
                                     }
                                     placeholder="Enter Email"
                                     value={values.email}
@@ -209,9 +205,7 @@ function Register(props) {
                             </div>
                             <div className={styles.lastText}>
                                 <span>Already have an account? </span>
-                                <Link exact to="/login">
-                                    Log In
-                                </Link>
+                                <Link to="/login">Log In</Link>
                             </div>
                         </Form>
                     </Col>
