@@ -104,3 +104,6 @@ export function contactForm(data) {
             });
     };
 }
+export const resetContactSent = () => (dispatch) => {
+    dispatch({ type: actionTypes.RESET_CONTACT_SENT });
+};

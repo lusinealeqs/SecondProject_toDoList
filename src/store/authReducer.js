@@ -7,6 +7,7 @@ const defaultState = {
     successMessage: null,
     error: null,
     userInfo: null,
+    isContactSent: false,
 };
 
 export const authReducer = (state = defaultState, action) => {
@@ -63,9 +64,12 @@ export const authReducer = (state = defaultState, action) => {
             return {
                 ...state,
                 loading: false,
+                isContactSent: true,
                 successMessage: "You have successfully sent your message!",
             };
         }
+        case actionTypes.RESET_CONTACT_SENT:
+            return { ...state, isContactSent: false };
         default:
             return state;
     }

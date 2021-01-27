@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { contactForm } from "../../../store/userActions";
+import { contactForm, resetContactSent } from "../../../store/userActions";
 import styles from "./contact.module.css";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
 function Contact(props) {
+    const { isContactSent, resetContactSent } = props;
     const [values, setValues] = useState({
         name: "",
         email: "",
@@ -16,6 +17,16 @@ function Contact(props) {
         email: null,
         message: null,
     });
+    useEffect(() => {
+        if (isContactSent && values.email) {
+            setValues({
+                name: "",
+                email: "",
+                message: "",
+            });
+            resetContactSent();
+        }
+    }, [isContactSent, resetContactSent, values.email]);
 
     const handleSubmit = () => {
         let { name, email, message } = values;
@@ -61,11 +72,6 @@ function Contact(props) {
 
         if (valid) {
             props.contactForm(values);
-            setValues({
-                name: "",
-                email: "",
-                message: "",
-            });
         }
     };
 
@@ -166,8 +172,13 @@ function Contact(props) {
     );
 }
 
+const mapStateToProps = (state) => ({
+    isContactSent: state.authReducer.isContactSent,
+});
+
 const mapDispatchToProps = {
     contactForm,
+    resetContactSent,
 };
 
-export default connect(null, mapDispatchToProps)(Contact);
+export default connect(mapStateToProps, mapDispatchToProps)(Contact);
