@@ -1,66 +1,27 @@
-.main{
-    display: flex;
-    justify-content: center;
-    align-items: center;    
-    height: calc(100vh - 208px);
-}
-.inner{
-    width: 100%;
-    font-size: 18px;
-    background-color: white;
-    padding: 15px;
-    border-radius: 20px;
-    text-align: center;
-    border-bottom: 1px solid;
-    border-left: 1px solid;
-    border-right: 1px solid;
-    box-shadow: 10px 10px 5px grey ;
-}
-.heading{
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-/* _____________________________________________________________________ */
-/* .contenierOfAboutPage{
-    display: flex;
-    margin-top: 4%;
-}
-.innerDivOfAboutPage{
-    margin-bottom: 37%;
-    width: 50%;
-    font-size: 18px;
-    background-color: white;
-    padding: 15px;
-    border-radius: 20px;
-    text-align: center;
-}
-.innerDivOfAboutPage p{
-    margin-top: 3%;
-}
-.img{
-    width: 100%;
-}
-.leftDivOfAboutPage{
+.main {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0% 1% 8% 1%;
-    width: 25%;
+    height: calc(100vh - 208px);
+}
+.inner {
+    width: 100%;
     font-size: 18px;
     background-color: white;
     padding: 15px;
     border-radius: 20px;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    box-shadow: 11px 10px 8px grey;
+}
+.heading {
+    margin-bottom: 20px;
     text-align: center;
 }
-.rightDivOfAboutPage{
-    margin: 0% 1%;
-    margin-bottom: 37%;
-    width: 35%;
-    height: auto;
-    font-size: 18px;
-    background-color: white;
-    padding: 15px;
-    border-radius: 20px;
-    text-align: center;
-} */
+.invalid {
+    border: 1px solid red;
+}
+.formText {
+    font-size: 12px;
+    text-align: start;
+}

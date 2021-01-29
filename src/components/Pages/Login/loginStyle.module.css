@@ -11,10 +11,8 @@
     padding: 15px;
     border-radius: 20px;
     text-align: center;
-    border-bottom: 1px solid;
-    border-left: 1px solid;
-    border-right: 1px solid;
-    box-shadow: 10px 10px 5px grey;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    box-shadow: 11px 10px 8px grey;
 }
 .heading {
     margin-bottom: 20px;
@@ -29,4 +27,8 @@
 }
 .invalid {
     border: 1px solid red;
+}
+.formText {
+    font-size: 12px;
+    text-align: start;
 }

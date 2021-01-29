@@ -17,19 +17,37 @@ function Login(props) {
     });
 
     const handleSubmit = () => {
-        const { email, password } = values;
-        let regexpEmail = new RegExp(
-            /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
-        );
+        let { email, password } = values;
 
-        let testEmail = !regexpEmail.test(email);
+        const regexpEmail = /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i;
+        const testEmail = regexpEmail.test(email);
+
+        email = email.trim();
+
+        let valid = true;
+
+        let emailError = null;
+        let passwordError = null;
+
+        if (!testEmail) {
+            emailError = "Email is invalid!";
+            valid = false;
+        }
+        if (!email) {
+            emailError = "Email is required!";
+            valid = false;
+        }
+        if (!password) {
+            passwordError = "Password is required!";
+            valid = false;
+        }
 
         setErrors({
-            email: email ? null || testEmail : "Email is required",
-            password: password ? null : "Password is required",
+            email: emailError,
+            password: passwordError,
         });
 
-        if (email && password) {
+        if (valid) {
             props.login(values);
         }
     };
@@ -67,7 +85,9 @@ function Login(props) {
                                     onChange={handleChange}
                                 />
                                 {
-                                    <Form.Text className="text-danger">
+                                    <Form.Text
+                                        className={`${styles.formText} text-danger`}
+                                    >
                                         {errors.email}
                                     </Form.Text>
                                 }
@@ -84,7 +104,9 @@ function Login(props) {
                                     name="password"
                                 />
                                 {
-                                    <Form.Text className="text-danger">
+                                    <Form.Text
+                                        className={`${styles.formText} text-danger`}
+                                    >
                                         {errors.password}
                                     </Form.Text>
                                 }
@@ -99,9 +121,7 @@ function Login(props) {
                             </div>
                             <div className={styles.lastText}>
                                 <span>Don't have an account? </span>
-                                <Link exact to="/register">
-                                    Register for free
-                                </Link>
+                                <Link to="/register">Register for free</Link>
                             </div>
                         </Form>
                     </Col>
@@ -111,7 +131,6 @@ function Login(props) {
     );
 }
 
-// export default Login;
 const mapDispatchToProps = {
     login,
 };

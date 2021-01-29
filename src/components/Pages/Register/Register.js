@@ -7,42 +7,72 @@ import styles from "./registerStyle.module.css";
 
 function Register(props) {
     const [values, setValues] = useState({
+        name: "",
+        surname: "",
         email: "",
         password: "",
         confirmPassword: "",
     });
 
     const [errors, setErrors] = useState({
-        email: null,
-        password: null,
-        confirmPassword: null,
         name: "",
         surname: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
     });
 
     const handleSubmit = () => {
-        const { name, surname, email, password, confirmPassword } = values;
+        let { name, surname, email, password, confirmPassword } = values;
+
+        const regexpEmail = /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i;
+        const testEmail = regexpEmail.test(email);
+
         let valid = true;
 
-        let passwordMessage = null;
+        let nameError = null;
+        let surnameError = null;
+        let emailError = null;
+        let passwordError = null;
+        let confirmPasswordError = null;
+
+        if (!name) {
+            nameError = "Name is required!";
+            valid = false;
+        }
+        if (!surname) {
+            surnameError = "Surname is required!";
+            valid = false;
+        }
+        if (!testEmail) {
+            emailError = "Email is invalid!";
+            valid = false;
+        }
+        if (!email) {
+            emailError = "Email is required!";
+            valid = false;
+        }
+        if (!password) {
+            passwordError = "Password is required!";
+            valid = false;
+        }
         if (!confirmPassword) {
-            passwordMessage = "Password is required";
+            confirmPasswordError = "Confirm your password!";
             valid = false;
         } else if (password !== confirmPassword) {
-            passwordMessage = "Passwords didn't match";
+            passwordError = "Passwords didn't match";
             valid = false;
         }
 
         setErrors({
-            email: email ? null : "Email is required",
-            confirmPassword: passwordMessage,
-            password: password ? null : "Password is required",
-            name: name ? null : "Please, type your name",
-            surname: surname ? null : "Please, type your surname",
+            email: emailError,
+            confirmPassword: confirmPasswordError,
+            password: passwordError,
+            name: nameError,
+            surname: surnameError,
         });
 
         if (valid) {
-            console.log(values);
             props.register(values);
         }
     };
@@ -81,7 +111,9 @@ function Register(props) {
                                     onChange={handleChange}
                                 />
                                 {
-                                    <Form.Text className="text-danger">
+                                    <Form.Text
+                                        className={` ${styles.formText} text-danger`}
+                                    >
                                         {errors.name}
                                     </Form.Text>
                                 }
@@ -99,7 +131,9 @@ function Register(props) {
                                     onChange={handleChange}
                                 />
                                 {
-                                    <Form.Text className="text-danger">
+                                    <Form.Text
+                                        className={` ${styles.formText} text-danger`}
+                                    >
                                         {errors.surname}
                                     </Form.Text>
                                 }
@@ -109,14 +143,16 @@ function Register(props) {
                                     type="email"
                                     name="email"
                                     className={
-                                        errors.password ? styles.invalid : ""
+                                        errors.email ? styles.invalid : ""
                                     }
                                     placeholder="Enter Email"
                                     value={values.email}
                                     onChange={handleChange}
                                 />
                                 {
-                                    <Form.Text className="text-danger">
+                                    <Form.Text
+                                        className={` ${styles.formText} text-danger`}
+                                    >
                                         {errors.email}
                                     </Form.Text>
                                 }
@@ -133,7 +169,9 @@ function Register(props) {
                                     name="password"
                                 />
                                 {
-                                    <Form.Text className="text-danger">
+                                    <Form.Text
+                                        className={` ${styles.formText} text-danger`}
+                                    >
                                         {errors.password}
                                     </Form.Text>
                                 }
@@ -151,7 +189,9 @@ function Register(props) {
                                     onChange={handleChange}
                                     name="confirmPassword"
                                 />
-                                <Form.Text className="text-danger">
+                                <Form.Text
+                                    className={` ${styles.formText} text-danger`}
+                                >
                                     {errors.confirmPassword}
                                 </Form.Text>
                             </Form.Group>
@@ -165,9 +205,7 @@ function Register(props) {
                             </div>
                             <div className={styles.lastText}>
                                 <span>Already have an account? </span>
-                                <Link exact to="/login">
-                                    Log In
-                                </Link>
+                                <Link to="/login">Log In</Link>
                             </div>
                         </Form>
                     </Col>

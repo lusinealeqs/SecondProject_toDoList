@@ -2,7 +2,20 @@
     background: #444444;
     height: 45px;
     font-family: "Open Sans", sans-serif;
-    color: #ffffff;
+    font-size: 18px;
+    color: hsl(0, 0%, 100%);
     padding: 12px;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.iconsDiv {
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+}
+.iconsDiv a {
+    color: white;
+    padding: 0 5px;
 }
